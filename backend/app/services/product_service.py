@@ -12,7 +12,7 @@ class ProductService:
 
     def get_all_products(self) -> ProductListResponse:
         products = self.product_repository.get_all()
-        products_response = [ProductListResponse.model_validate(product) for product in products]
+        products_response = [ProductResponse.model_validate(product) for product in products]
         return ProductListResponse(products=products_response, total=len(products_response))
     
     def get_product_by_id(self, product_id: int) -> ProductResponse:
@@ -33,7 +33,7 @@ class ProductService:
             )
         
         products = self.product_repository.get_by_category(category_id)
-        products_response = [ProductListResponse.model_validate(product) for product in products]
+        products_response = [ProductResponse.model_validate(product) for product in products]
         return ProductListResponse(products=products_response, total=len(products_response))
 
     def create_product(self, product_data: ProductCreate) -> ProductResponse:
